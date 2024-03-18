@@ -1,0 +1,54 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Plante{% endblock %}
+
+{% block body %}
+    <h1>Plante</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plante.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ plante.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ plante.Description }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ plante.Picture }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ plante.disponibilite }}</td>
+            </tr>
+            <tr>
+                <th>Vitamine</th>
+                <td>{{ plante.vitamine }}</td>
+            </tr>
+            <tr>
+                <th>Enzymes</th>
+                <td>{{ plante.enzymes }}</td>
+            </tr>
+            <tr>
+                <th>Mineraux</th>
+                <td>{{ plante.mineraux }}</td>
+            </tr>
+            <tr>
+                <th>Antioxydants</th>
+                <td>{{ plante.antioxydants }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plante_index') }}">back to list</a>
+
+    <a href="{{ path('app_plante_edit', {'id': plante.id}) }}">edit</a>
+
+    {{ include('plante/_delete_form.html.twig') }}
+{% endblock %}

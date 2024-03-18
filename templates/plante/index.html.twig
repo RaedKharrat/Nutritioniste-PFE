@@ -1,0 +1,49 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Plante index{% endblock %}
+
+{% block body %}
+    <h1>Plante index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Picture</th>
+                <th>Disponibilite</th>
+                <th>Vitamine</th>
+                <th>Enzymes</th>
+                <th>Mineraux</th>
+                <th>Antioxydants</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plante in plantes %}
+            <tr>
+                <td>{{ plante.id }}</td>
+                <td>{{ plante.nom }}</td>
+                <td>{{ plante.Description }}</td>
+                <td>{{ plante.Picture }}</td>
+                <td>{{ plante.disponibilite }}</td>
+                <td>{{ plante.vitamine }}</td>
+                <td>{{ plante.enzymes }}</td>
+                <td>{{ plante.mineraux }}</td>
+                <td>{{ plante.antioxydants }}</td>
+                <td>
+                    <a href="{{ path('app_plante_show', {'id': plante.id}) }}">show</a>
+                    <a href="{{ path('app_plante_edit', {'id': plante.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plante_new') }}">Create new</a>
+{% endblock %}
