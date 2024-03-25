@@ -1,4 +1,72 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'my-form'}}) }}
+    {# Display global form errors #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.nom, 'Nom:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.nom) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_label(form.Description, 'Description:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.Description) }}
+    </div>
+
+   
+
+    <div class="form-group">
+        {{ form_label(form.vitamine, 'Vitamine:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.vitamine, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.vitamine) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.enzymes, 'Enzymes:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.enzymes, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.enzymes) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.mineraux, 'Minéraux:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.mineraux, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.mineraux) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.antioxydants, 'Antioxydants:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.antioxydants, {'attr': {'class': 'form-control'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.antioxydants) }}
+    </div>
+
+  <div class="form-group disponibilite-switch" style="margin-top:20px;"> 
+        <div class="form-check form-switch" >
+            {{ form_label(form.disponibilite, 'Disponibilité:', {'label_attr': {'class': 'form-check-label'}}) }}
+            <div class="custom-control custom-switch" >
+                {{ form_widget(form.disponibilite, {'attr': {'class': 'custom-control-input'}}) }}
+            </div>
+        </div>
+        {{ form_errors(form.disponibilite) }}
+    </div>
+    
+     <div class="form-group" style="margin-top:20px;">
+        {{ form_label(form.Picture, 'Image:', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.Picture, {'attr': {'class': 'form-control-file'}}) }}
+        {# Display field errors #}
+        {{ form_errors(form.Picture) }}
+    </div>
+
+  
+
+<div style="margin-top:20px;">
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_plante_index') }}" class="btn btn-outline-primary">back to list</a>
+</div>
 {{ form_end(form) }}

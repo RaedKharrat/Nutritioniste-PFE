@@ -1,16 +1,16 @@
-{% extends 'front.html.twig' %}
+{% extends 'back.html.twig' %}
 
 {% block title %}Recette index{% endblock %}
 
 {% block body %}
-    <h1>Recette index</h1>
+    <h1>All Recettes</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>TypeDePreparation</th>
                 <th>Picture</th>
+                <th>TypeDePreparation</th>
                 <th>Ingredient</th>
                 <th>actions</th>
             </tr>
@@ -18,13 +18,21 @@
         <tbody>
         {% for recette in recettes %}
             <tr>
-                <td>{{ recette.id }}</td>
+                <td>{{ loop.index }}</td> {# Use loop.index to display the index #}
+                <td>
+                    {% if recette.Picture %}
+                        <img src="{{ asset('pictureRecettes/' ~ recette.Picture) }}" style="max-width: 80px; max-height: 80px;">
+                    {% else %}
+                        No picture available
+                    {% endif %}
+                </td> 
                 <td>{{ recette.typeDePreparation }}</td>
-                <td>{{ recette.Picture }}</td>
                 <td>{{ recette.ingredient }}</td>
                 <td>
-                    <a href="{{ path('app_recette_show', {'id': recette.id}) }}">show</a>
-                    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}">edit</a>
+                    <a href="{{ path('app_recette_show', {'id': recette.id}) }}" class="btn btn-outline-secondary">show</a>
+                    <a href="{{ path('app_recette_edit', {'id': recette.id}) }}" class="btn btn-primary">edit</a>
+                        {{ include('recette/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
@@ -35,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_recette_new') }}">Create new</a>
+    <a href="{{ path('app_recette_new') }}" class="btn btn-success">    <i class="bi bi-plus-circle"></i> Create new</a>
 {% endblock %}

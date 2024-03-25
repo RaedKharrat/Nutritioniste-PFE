@@ -3,47 +3,56 @@
 {% block title %}Plante index{% endblock %}
 
 {% block body %}
-    <h1>Plante index</h1>
+    <h1>All Plantes</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Picture</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Picture</th>
                 <th>Disponibilite</th>
                 <th>Vitamine</th>
                 <th>Enzymes</th>
                 <th>Mineraux</th>
                 <th>Antioxydants</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for plante in plantes %}
             <tr>
-                <td>{{ plante.id }}</td>
+                <td>{{ loop.index }}</td> {# Use loop.index to display the index #}
+                <td>
+                    {% if plante.Picture %}
+                        <img src="{{ asset('picturePlantes/' ~ plante.Picture) }}" alt="{{ plante.nom }} Picture" style="max-width: 80px; max-height: 80px;">
+                    {% else %}
+                        No picture available
+                    {% endif %}
+                </td>
                 <td>{{ plante.nom }}</td>
                 <td>{{ plante.Description }}</td>
-                <td>{{ plante.Picture }}</td>
+                
                 <td>{{ plante.disponibilite }}</td>
                 <td>{{ plante.vitamine }}</td>
                 <td>{{ plante.enzymes }}</td>
                 <td>{{ plante.mineraux }}</td>
                 <td>{{ plante.antioxydants }}</td>
                 <td>
-                    <a href="{{ path('app_plante_show', {'id': plante.id}) }}">show</a>
-                    <a href="{{ path('app_plante_edit', {'id': plante.id}) }}">edit</a>
+                    <a href="{{ path('app_plante_show', {'id': plante.id}) }}" class="btn btn-outline-secondary">show</a>
+                    <a href="{{ path('app_plante_edit', {'id': plante.id}) }}" class="btn btn-primary">edit</a>
+                        {{ include('plante/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_plante_new') }}">Create new</a>
+    <a href="{{ path('app_plante_new') }}" class="btn btn-success">  <i class="bi bi-plus-circle"></i> Create new</a>
 {% endblock %}

@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 #[Route('/recette')]
 class RecetteController extends AbstractController
@@ -22,6 +24,14 @@ class RecetteController extends AbstractController
         ]);
     }
 
+    #[Route('/front', name: 'app_recette_index_front', methods: ['GET'])]
+    public function indexFront(RecetteRepository $recetteRepository): Response
+    {
+        return $this->render('recette/inndexFront.html.twig', [
+            'recettes' => $recetteRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_recette_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -30,6 +40,24 @@ class RecetteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $pictureFile = $form['Picture']->getData();
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $pictureDirectory = $this->getParameter('public_picture_recettes_directory');
+                // Move the file to the desired directory
+                try {
+                    $pictureFile->move(
+                        $pictureDirectory,
+                        $originalFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle file upload error
+                }
+                // Update the 'Picture' attribute of the Plante entity with the file name
+                $recette->setPicture($originalFilename);
+            }
+    
             $entityManager->persist($recette);
             $entityManager->flush();
 
