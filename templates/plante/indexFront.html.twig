@@ -3,55 +3,51 @@
 {% block title %}Plante index{% endblock %}
 
 {% block body %}
- <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-0 gx-5 align-items-end">
-                    <div class="col-lg-6">
-                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <h1 class="mb-3">Property Listing</h1>
-                            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-    <div class="row g-4">
-        {% for plante in plantes %}
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="">
-                <div class="property-item rounded overflow-hidden">
-                    <div class="position-relative overflow-hidden">
-                        <a href="">
-                            <img class="img-fluid" src="{{ asset('picturePlantes/' ~ plante.Picture) }}" alt="{{ plante.nom }} Picture">
-                        </a>
-                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{{ plante.disponibilite }}</div>
-
-                    </div>
-                    <div class="p-4 pb-0">
-                        <h3 class="text-primary mb-3">{{ plante.nom }}</h3>
-                        <p>{{ plante.Description }}</p>
-                        
-                        <strong style="margin:10px;" class="btn btn-success">Vitamine: </strong>{{ plante.vitamine }}
-                        <strong style="margin:10px;" class="btn btn-success">Enzymes:</strong> {{ plante.enzymes }}
-                        <strong style="margin:10px;" class="btn btn-success">Mineraux:</strong> {{ plante.mineraux }}
-                        <strong style="margin:10px;" class="btn btn-success">Antioxydants: </strong>{{ plante.antioxydants }}
-                    </div>
-                    <div class="d-flex border-top justify-content-center">
-                        <a href="{{ path('app_plante_show', {'id': plante.id}) }}" class="btn btn-outline-success" style="margin :10px">More Detais</a>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="col-12">
-                <p class="text-center">No records found</p>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-                    
-                    
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                    <h1 class="mb-3">Our Plants</h1>
+                    <p>You'll find below some of our healthy plants that are well-structured and well-specified by our medical teams.</p>
                 </div>
             </div>
         </div>
-
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    {% for plante in plantes %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp">
+                        <div class="card plant-card" style="height: 650px;">
+                            <div class="card-img-top position-relative overflow-hidden">
+                                <a href="#">
+                                    <img class="img-fluid" src="{{ asset('picturePlantes/' ~ plante.Picture) }}" alt="{{ plante.nom }} Picture">
+                                </a>
+                                <div class="availability-badge bg-primary rounded text-white position-absolute top-0 start-0 m-3 py-1 px-3">{{ plante.disponibilite }}</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title text-primary mb-3">{{ plante.nom }}</h3>
+                                <p class="card-text">{{ plante.Description }}</p>
+                                <div class="attributes">
+                                    <strong class="attribute">Vitamine:</strong> {{ plante.vitamine }} |
+                                    <strong class="attribute">Enzymes:</strong> {{ plante.enzymes }} |
+                                    <strong class="attribute">Mineraux:</strong> {{ plante.mineraux }} |
+                                    <strong class="attribute">Antioxydants:</strong> {{ plante.antioxydants }}
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white border-top-0 text-center">
+                                <a href="{{ path('app_plante_show', {'id': plante.id}) }}" class="btn btn-outline-success btn-details">More Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-12">
+                        <p class="text-center">No records found</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

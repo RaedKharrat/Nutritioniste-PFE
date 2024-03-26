@@ -70,6 +70,14 @@ class RecetteController extends AbstractController
         ]);
     }
 
+    #[Route('front/{id}', name: 'app_recette_show_front', methods: ['GET'])]
+    public function show1(Recette $recette): Response
+    {
+        return $this->render('recette/show1.html.twig', [
+            'recette' => $recette,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_recette_show', methods: ['GET'])]
     public function show(Recette $recette): Response
     {

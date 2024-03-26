@@ -27,7 +27,13 @@ class PlanteController extends AbstractController
     #[Route('/about', name: 'app_about', methods: ['GET'])]
     public function about(): Response
     {
-        return $this->render('about.htm.twig');
+        return $this->render('about.html.twig');
+    }
+
+    #[Route('/home', name: 'app_home', methods: ['GET'])]
+    public function homepage(): Response
+    {
+        return $this->render('home.html.twig');
     }
 
     #[Route('/contact', name: 'app_contact', methods: ['GET'])]
@@ -82,6 +88,14 @@ class PlanteController extends AbstractController
         ]);
     }
 
+
+    #[Route('front/{id}', name: 'app_plante_show_front', methods: ['GET'])]
+    public function show1(Plante $plante): Response
+    {
+        return $this->render('plante/show1.html.twig', [
+            'plante' => $plante,
+        ]);
+    }
 
     
     #[Route('/{id}', name: 'app_plante_show', methods: ['GET'])]

@@ -46,15 +46,12 @@
         {{ form_errors(form.antioxydants) }}
     </div>
 
-  <div class="form-group disponibilite-switch" style="margin-top:20px;"> 
-        <div class="form-check form-switch" >
-            {{ form_label(form.disponibilite, 'Disponibilité:', {'label_attr': {'class': 'form-check-label'}}) }}
-            <div class="custom-control custom-switch" >
-                {{ form_widget(form.disponibilite, {'attr': {'class': 'custom-control-input'}}) }}
-            </div>
-        </div>
-        {{ form_errors(form.disponibilite) }}
-    </div>
+ <div class="form-group disponibilite-choice">
+    {{ form_label(form.disponibilite, 'Disponibilité:', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(form.disponibilite, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.disponibilite) }}
+</div>
+
     
      <div class="form-group" style="margin-top:20px;">
         {{ form_label(form.Picture, 'Image:', {'label_attr': {'class': 'control-label'}}) }}

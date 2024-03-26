@@ -22,14 +22,13 @@ class PlanteType extends AbstractType
                 'mapped' => false, // This tells Symfony not to try to map this field to any entity property
                 'required' => false, // Make the file upload optional
             ])
-            ->add('disponibilite', ChoiceType::class, [ // Change to toggle switch
+            ->add('disponibilite', ChoiceType::class, [
                 'choices' => [
-                    'Disponible' => true,
-                    'Non disponible' => false,
+                    'Disponible' => 'Disponible',
+                    'Non disponible' => 'Non Disponible',
                 ],
-                'expanded' => true,
-                'multiple' => false,
                 'label' => 'Disponibilité',
+                'attr' => ['class' => 'custom-select'], // Optionally, you can add a class
             ])
             ->add('vitamine')
             ->add('enzymes')
